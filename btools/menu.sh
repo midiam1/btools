@@ -2,7 +2,7 @@
 
 # Function for Option 1
 update_system() {
-    sudo apt -y update
+    sudo apt -y update && sudo apt -y upgrade
 }
 
 # Function for Option 2
@@ -71,7 +71,7 @@ create_sudo_user() {
 # Main menu loop
 while true; do
     echo "--- Main Menu ---"
-    echo "1. Actualizar Sistema"
+    echo "1. Actualizar y Mejorar Sistema (update & upgrade)"
     echo "2. Pones Bonito el Prompt"
     echo "3. Instalar MC"
     echo "4. Instalar Webmin"
