@@ -47,6 +47,26 @@ install_cockpit() {
     echo "Cockpit instalado correctamente. Accede a través de https://tu-ip:9090"
 }
 
+# Function for Option 6
+create_sudo_user() {
+    read -p "Introduce el nombre del nuevo usuario: " username
+    if [ -z "$username" ]; then
+        echo "El nombre de usuario no puede estar vacío."
+        return
+    fi
+    read -s -p "Introduce la contraseña para $username: " password
+    echo
+    sudo useradd -m -s /bin/bash "$username"
+    if [ $? -eq 0 ]; then
+        echo "$username:$password" | sudo chpasswd
+        sudo usermod -aG sudo "$username"
+        echo "Usuario '$username' creado y añadido al grupo 'sudo' correctamente."
+        echo "Ahora puedes usar este usuario para acceder a Cockpit."
+    else
+        echo "Error al crear el usuario. ¿Quizás ya existe?"
+    fi
+}
+
 
 # Main menu loop
 while true; do
@@ -56,7 +76,8 @@ while true; do
     echo "3. Instalar MC"
     echo "4. Instalar Webmin"
     echo "5. Instalar Cockpit"
-    echo "6. Exit"
+    echo "6. Crear Usuario con Sudo"
+    echo "7. Exit"
     echo "-----------------"
     read -p "Enter your choice: " choice
 
@@ -77,6 +98,9 @@ while true; do
             install_cockpit
             ;;
         6)
+            create_sudo_user
+            ;;
+        7)
             echo "Exiting..."
             break
             ;;
