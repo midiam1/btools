@@ -40,6 +40,13 @@ install_webmin() {
     echo "Webmin instalado correctamente."
 }
 
+# Function for Option 5
+install_cockpit() {
+    echo "Instalando Cockpit..."
+    sudo apt-get install -y cockpit
+    echo "Cockpit instalado correctamente. Accede a través de https://tu-ip:9090"
+}
+
 
 # Main menu loop
 while true; do
@@ -48,7 +55,8 @@ while true; do
     echo "2. Pones Bonito el Prompt"
     echo "3. Instalar MC"
     echo "4. Instalar Webmin"
-    echo "5. Exit"
+    echo "5. Instalar Cockpit"
+    echo "6. Exit"
     echo "-----------------"
     read -p "Enter your choice: " choice
 
@@ -66,6 +74,9 @@ while true; do
             install_webmin
             ;;
         5)
+            install_cockpit
+            ;;
+        6)
             echo "Exiting..."
             break
             ;;
