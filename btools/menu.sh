@@ -17,12 +17,38 @@ EOF
     echo "Prompt actualizado. Para ver los cambios, reinicia tu terminal o ejecuta: source ~/.bashrc"
 }
 
+# Function for Option 3
+install_mc() {
+    sudo apt -y install mc
+}
+
+# Function for Option 4
+install_webmin() {
+    echo "Configurando el repositorio de Webmin..."
+    # Download GPG key
+    sudo wget -qO- http://www.webmin.com/jcameron-key.asc | sudo apt-key add -
+    
+    # Add Webmin repository
+    echo "deb http://download.webmin.com/download/repository sarge contrib" | sudo tee /etc/apt/sources.list.d/webmin.list
+    
+    echo "Actualizando la lista de paquetes..."
+    sudo apt-get update
+    
+    echo "Instalando Webmin..."
+    sudo apt-get install -y webmin
+    
+    echo "Webmin instalado correctamente."
+}
+
+
 # Main menu loop
 while true; do
     echo "--- Main Menu ---"
     echo "1. Actualizar Sistema"
     echo "2. Pones Bonito el Prompt"
-    echo "3. Exit"
+    echo "3. Instalar MC"
+    echo "4. Instalar Webmin"
+    echo "5. Exit"
     echo "-----------------"
     read -p "Enter your choice: " choice
 
@@ -34,6 +60,12 @@ while true; do
             set_prompt
             ;;
         3)
+            install_mc
+            ;;
+        4)
+            install_webmin
+            ;;
+        5)
             echo "Exiting..."
             break
             ;;
