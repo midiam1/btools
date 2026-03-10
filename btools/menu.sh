@@ -132,6 +132,28 @@ create_sudo_user() {
     fi
 }
 
+# Function for Option 7
+reboot_system() {
+    read -p "¿Estás seguro de que quieres reiniciar el sistema? (s/N): " confirm
+    if [[ "$confirm" == "s" || "$confirm" == "S" ]]; then
+        echo "Reiniciando el sistema..."
+        sudo reboot
+    else
+        echo "Reinicio cancelado."
+    fi
+}
+
+# Function for Option 8
+power_off() {
+    read -p "¿Estás seguro de que quieres apagar el sistema? (s/N): " confirm
+    if [[ "$confirm" == "s" || "$confirm" == "S" ]]; then
+        echo "Apagando el sistema..."
+        sudo shutdown now
+    else
+        echo "Apagado cancelado."
+    fi
+}
+
 
 # Main menu loop
 while true; do
@@ -142,7 +164,9 @@ while true; do
     echo "4. Instalar Webmin"
     echo "5. Instalar Cockpit"
     echo "6. Crear Usuario con Sudo"
-    echo "7. Salir"
+    echo "7. Reiniciar Sistema"
+    echo "8. Apagar Sistema"
+    echo "9. Salir"
     echo "------------------------------------"
     read -p "Elige una opción: " choice
 
@@ -153,7 +177,9 @@ while true; do
         4) install_webmin ;;
         5) install_cockpit ;;
         6) create_sudo_user ;;
-        7) echo "Saliendo..."; break ;;
+        7) reboot_system ;;
+        8) power_off ;;
+        9) echo "Saliendo..."; break ;;
         *) echo "Opción no válida. Inténtalo de nuevo." ;;
     esac
     echo "" # Add a newline for better readability
