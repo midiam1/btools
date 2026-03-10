@@ -55,13 +55,20 @@ update_system() {
 
 # Function for Option 2
 set_prompt() {
-    # This function is universal and doesn't need changes
+    # Appends the custom prompt to .bashrc
     cat <<'EOF' >> "$HOME/.bashrc"
 
 # Custom Prompt
 export PS1='\[\e[34m\]\u\[\e[38;5;214m\]@\[\e[31m\]\h\[\e[38;5;214m\]:\[\e[38;5;202m\]$(pwd)\[\e[38;5;214m\]: \[\e[m\]'
 EOF
-    echo "Prompt actualizado. Para ver los cambios, reinicia tu terminal o ejecuta: source ~/.bashrc"
+    echo "Prompt añadido a ~/.bashrc."
+    
+    # Reload .bashrc to apply changes to the current session
+    # IMPORTANT: This will only work if the script is run with "source menu.sh"
+    echo "Aplicando cambios en la sesión actual..."
+    source "$HOME/.bashrc"
+    
+    echo "¡Prompt actualizado! Si no ves el cambio, ejecuta el menú con: source btools/menu.sh"
 }
 
 # Function for Option 3
@@ -130,7 +137,7 @@ create_sudo_user() {
 while true; do
     echo "--- Main Menu (Modo Universal) ---"
     echo "1. Actualizar y Mejorar Sistema"
-    echo "2. Poner Bonito el Prompt"
+    echo "2. Poner Bonito el Prompt (ejecutar con 'source')"
     echo "3. Instalar MC (Midnight Commander)"
     echo "4. Instalar Webmin"
     echo "5. Instalar Cockpit"
